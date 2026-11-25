@@ -1,0 +1,250 @@
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Lista04 {
+
+    static Locale BR = Locale.forLanguageTag("pt-BR");
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        sc.useLocale(BR); 
+
+        System.out.print("Qual exercício executar (1 a 10)? ");
+        int opcao = sc.nextInt();
+
+        switch (opcao) {
+            case 1 -> ex1();
+            case 2 -> ex2();
+            case 3 -> ex3();
+            case 4 -> ex4();
+            case 5 -> ex5();
+            case 6 -> ex6();
+            case 7 -> ex7();
+            case 8 -> ex8();
+            case 9 -> ex9();
+            case 10 -> ex10();
+            default -> System.out.println("Exercício inválido.");
+        }
+    }
+
+    // 1
+    static void ex1() {
+        double[] notas = {7.5, 6.0, 8.0, 5.5};
+        int ultimo = notas.length - 1;
+
+        System.out.println("Quantidade de notas: " + notas.length);
+        System.out.printf(BR, "Primeira nota: %.1f%n", notas[0]);
+        System.out.printf(BR, "Última nota: %.1f%n", notas[ultimo]);
+    }
+
+    // 2
+    static void ex2() {
+        double[] precos = new double[3];
+        precos[0] = 12.90;
+        precos[1] = 5.50;
+        precos[2] = 30.00;
+
+        for (int i = 0; i < precos.length; i++) {
+            System.out.printf(BR, "Produto %d: R$ %.2f%n", i + 1, precos[i]);
+        }
+    }
+
+    // 3
+    static void ex3() {
+        double[] notas = new double[4];
+        double soma = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            System.out.print("Nota " + (i + 1) + ": ");
+            notas[i] = sc.nextDouble();
+            soma += notas[i];
+        }
+
+        double media = soma / notas.length;
+        System.out.printf(BR, "Média: %.2f%n", media);
+
+        if (media >= 6) {
+            System.out.println("Situação: aprovado");
+        } else {
+            System.out.println("Situação: reprovado");
+        }
+    }
+
+    // 4
+    static void ex4() {
+        double[] precos = new double[5];
+        double total = 0;
+
+        for (int i = 0; i < precos.length; i++) {
+            System.out.print("Preço do produto " + (i + 1) + ": ");
+            precos[i] = sc.nextDouble();
+            total += precos[i];
+        }
+
+        System.out.println("Preços lidos:");
+        for (int i = 0; i < precos.length; i++) {
+            System.out.printf(BR, "Produto %d: R$ %.2f%n", i + 1, precos[i]);
+        }
+        System.out.printf(BR, "Total da compra: R$ %.2f%n", total);
+    }
+
+    // 5
+    static void ex5() {
+        double[] original = new double[5];
+        double[] comDesconto = new double[5];
+
+        for (int i = 0; i < original.length; i++) {
+            System.out.print("Preço do produto " + (i + 1) + ": ");
+            original[i] = sc.nextDouble();
+            comDesconto[i] = original[i] * 0.90;
+        }
+
+        for (int i = 0; i < original.length; i++) {
+            System.out.printf(BR, "Produto %d: original R$ %.2f | com desconto R$ %.2f%n",
+                    i + 1, original[i], comDesconto[i]);
+        }
+    }
+
+    // 6
+    static void ex6() {
+        System.out.print("Valor do empréstimo: ");
+        double valor = sc.nextDouble();
+        System.out.print("Taxa de juros simples mensal (%): ");
+        double taxa = sc.nextDouble();
+
+        double[] devido = new double[12];
+
+        for (int i = 0; i < devido.length; i++) {
+            int mes = i + 1;
+            devido[i] = valor + valor * taxa / 100 * mes;
+        }
+
+        for (int i = 0; i < devido.length; i++) {
+            System.out.printf(BR, "Mês %d: R$ %.2f%n", i + 1, devido[i]);
+        }
+    }
+
+    // 7
+    static void ex7() {
+        double[] salarios = new double[6];
+        double soma = 0;
+
+        for (int i = 0; i < salarios.length; i++) {
+            System.out.print("Salário do funcionário " + (i + 1) + ": ");
+            salarios[i] = sc.nextDouble();
+            soma += salarios[i];
+        }
+
+        double maior = salarios[0];
+        double menor = salarios[0];
+
+        for (int i = 1; i < salarios.length; i++) {
+            if (salarios[i] > maior) {
+                maior = salarios[i];
+            }
+            if (salarios[i] < menor) {
+                menor = salarios[i];
+            }
+        }
+
+        double media = soma / salarios.length;
+
+        int acimaDaMedia = 0;
+        for (int i = 0; i < salarios.length; i++) {
+            if (salarios[i] > media) {
+                acimaDaMedia++;
+            }
+        }
+
+        System.out.printf(BR, "Maior salário: R$ %.2f%n", maior);
+        System.out.printf(BR, "Menor salário: R$ %.2f%n", menor);
+        System.out.printf(BR, "Média: R$ %.2f%n", media);
+        System.out.println("Funcionários acima da média: " + acimaDaMedia);
+    }
+
+    // 8
+    static void ex8() {
+        double[] notas = new double[10];
+        int aprovados = 0;
+        int recuperacao = 0;
+        int reprovados = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            System.out.print("Nota do aluno " + (i + 1) + ": ");
+            notas[i] = sc.nextDouble();
+
+            if (notas[i] >= 6) {
+                aprovados++;
+            } else if (notas[i] >= 4) {
+                recuperacao++;
+            } else {
+                reprovados++;
+            }
+        }
+
+        System.out.println("Aprovados: " + aprovados);
+        System.out.println("Em recuperação: " + recuperacao);
+        System.out.println("Reprovados: " + reprovados);
+    }
+
+    // 9
+    static void ex9() {
+        int[] codigos = {101, 205, 310, 420, 550};
+        double[] precos = {4.50, 12.00, 7.90, 25.00, 3.20};
+
+        System.out.print("Digite o código do produto: ");
+        int codigo = sc.nextInt();
+
+        int posicao = -1;
+        for (int i = 0; i < codigos.length; i++) {
+            if (codigos[i] == codigo) {
+                posicao = i;
+            }
+        }
+
+        if (posicao == -1) {
+            System.out.println("Produto não encontrado.");
+        } else {
+            System.out.printf(BR, "Preço do produto %d: R$ %.2f%n", codigo, precos[posicao]);
+        }
+    }
+
+    // 10
+    static void ex10() {
+        System.out.print("Quantidade de itens da compra: ");
+        int n = sc.nextInt();
+
+        if (n < 1) {
+            System.out.println("Quantidade inválida.");
+            return;
+        }
+
+        double[] precos = new double[n];
+        int[] quantidades = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Preço unitário do item " + (i + 1) + ": ");
+            precos[i] = sc.nextDouble();
+            System.out.print("Quantidade do item " + (i + 1) + ": ");
+            quantidades[i] = sc.nextInt();
+        }
+
+        double total = 0;
+        for (int i = 0; i < n; i++) {
+            double subtotal = precos[i] * quantidades[i];
+            total += subtotal;
+            System.out.printf(BR, "Item %d: subtotal R$ %.2f%n", i + 1, subtotal);
+        }
+
+        double desconto = 0;
+        if (total > 200.00) {
+            desconto = total * 0.05;
+        }
+
+        double valorFinal = total - desconto;
+
+        System.out.printf(BR, "Total da compra: R$ %.2f%n", total);
+        System.out.printf(BR, "Desconto: R$ %.2f%n", desconto);
+        System.out.printf(BR, "Valor final a pagar: R$ %.2f%n", valorFinal);
+    }
+}
